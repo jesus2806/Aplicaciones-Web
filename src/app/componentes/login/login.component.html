@@ -1,42 +1,25 @@
-<form [formGroup]="loginForm" >
-    <p-card header="Ingresar" [style]="{width:'400px'}">
+<form [formGroup]="loginForm">
+    <p-card header="Ingresar" [style]="{width: '400px'}">
         <div class="field">
-            <label for="email">Email</label>
-                <input 
-                type="text" 
-                pInputText 
-                formControlName="email" 
-                class="w-full" 
-                name="email"
-                placeholder="Ingresa Email"/>
+            <label for="email">Correo electrónico</label>
+            <input type="text" pInputText class="w-full" placeholder="Ingresar Email" formControlName="email"/>
         </div>
-<small *ngIf="email.invalid && (email.dirty || email.touched)" class="block p-error">
-    <div *ngIf="email.hasError('requiered')">Se require email</div>
-    <div *ngIf="email.hasError('email')">Correo incorrecto</div>
-</small>
 
+        <small *ngIf="email.invalid && (email.dirty || email.touched)" class="block p-error">
+            <div *ngIf="email.hasError('required')">Se requiere Email</div>
+            <div *ngIf="email.hasError('email')">Correo incorrecto</div>
+        </small>
         <div class="field">
             <label for="password">Contraseña</label>
-
+            <p-password [toggleMask]="true" formControlName="password"></p-password>
         </div>
-        
-        <p-password>
-            <form [formGroup]="loginForm">
-                <p-password formControlName="value" [feedback]="false"></p-password>
-            </form>
-
-            <div>
-                <small *ngIf="password.invalid && (password.dirty || password.touched)">
-                    <div *ngIf="password.hasError('requiered')">Se require contraseña</div>
-                </small>
-            </div>
-        </p-password>
-
-        <p-button Label="Ingresar" styleClass="w-full"></p-button>
-
+        <small *ngIf="password.invalid && (password.dirty || password.touched)" class="block p-error">
+            <div *ngIf="password.hasError('required')">Se requiere contraseña</div>
+        </small>
+        <p-button label="Ingresar" class="w-full" [disabled]="loginForm.invalid" ></p-button>
         <div class="mt-2">
             Ya tienes cuenta? <a routerLink="/register">Registrate</a>
         </div>
-
+        
     </p-card>
 </form>
